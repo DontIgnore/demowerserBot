@@ -26,7 +26,9 @@
    MODERATOR_IDS=id_модераторов,через,запятую
    SPREADSHEET_ID=id_google_таблицы
    YOUTUBE_API_KEY=ваш_ключ_api_youtube
+   GOOGLE_CREDENTIALS={"type":"service_account",...}
    ```
+   Для переменной `GOOGLE_CREDENTIALS` нужно использовать содержимое файла `credentials.json` от Google Service Account в формате JSON. Вы можете скопировать содержимое файла и вставить его как значение этой переменной.
 
 3. Поместите файл `credentials.json` с учетными данными сервисного аккаунта Google в корневую директорию проекта.
 
@@ -55,6 +57,7 @@
    vercel env add MODERATOR_IDS
    vercel env add SPREADSHEET_ID
    vercel env add YOUTUBE_API_KEY
+   vercel env add GOOGLE_CREDENTIALS
    ```
 
 4. Загрузите файл `credentials.json` как секрет в Vercel:

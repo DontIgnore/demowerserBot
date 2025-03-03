@@ -9,10 +9,30 @@ const { extractVideoId } = require('./youtube');
 let sheet;
 let doc;
 
+// Получение учетных данных Google
+function getGoogleCredentials() {
+  // Проверяем, есть ли переменная окружения с учетными данными
+  if (process.env.GOOGLE_CREDENTIALS) {
+    try {
+      return JSON.parse(process.env.GOOGLE_CREDENTIALS);
+    } catch (error) {
+      console.error('Ошибка при парсинге GOOGLE_CREDENTIALS:', error);
+    }
+  }
+  
+  // Если нет переменной окружения, пытаемся загрузить из файла
+  try {
+    return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'credentials.json'), 'utf8'));
+  } catch (error) {
+    console.error('Ошибка при чтении credentials.json:', error);
+    throw new Error('Не удалось получить учетные данные Google');
+  }
+}
+
 // Инициализация Google Sheets
 async function setupGoogleSheets() {
   try {
-    const credentials = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'credentials.json'), 'utf8'));
+    const credentials = getGoogleCredentials();
     
     const jwt = new JWT({
       email: credentials.client_email,

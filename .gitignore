@@ -11,6 +11,13 @@ yarn-error.log
 .env.test.local
 .env.production.local
 
+# Учетные данные
+credentials.json
+tgBotik/credentials.json
+**/credentials.json
+*.pem
+*.key
+
 # Логи
 logs
 *.log

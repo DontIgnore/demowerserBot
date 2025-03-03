@@ -10,6 +10,7 @@ module.exports = {
   
   // Google Sheets конфигурация
   SPREADSHEET_ID: process.env.SPREADSHEET_ID,
+  GOOGLE_CREDENTIALS: process.env.GOOGLE_CREDENTIALS,
   
   // YouTube API конфигурация
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
