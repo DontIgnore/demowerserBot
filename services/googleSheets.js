@@ -17,6 +17,7 @@ function getGoogleCredentials() {
       return JSON.parse(process.env.GOOGLE_CREDENTIALS);
     } catch (error) {
       console.error('Ошибка при парсинге GOOGLE_CREDENTIALS:', error);
+      throw new Error('Не удалось распарсить GOOGLE_CREDENTIALS');
     }
   }
   
@@ -34,9 +35,17 @@ async function setupGoogleSheets() {
   try {
     const credentials = getGoogleCredentials();
     
+    console.log('Получены учетные данные Google. Email:', credentials.client_email);
+    
+    // Исправляем формат private_key, если нужно
+    let privateKey = credentials.private_key;
+    if (privateKey.indexOf('\\n') > -1) {
+      privateKey = privateKey.replace(/\\n/g, '\n');
+    }
+    
     const jwt = new JWT({
-      email: process.env.client_email,
-      key: process.env.private_key,
+      email: credentials.client_email,
+      key: privateKey,
       scopes: GOOGLE_API_SCOPES
     });
     
