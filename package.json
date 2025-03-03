@@ -1,0 +1,26 @@
+{
+  "name": "tgbot-js",
+  "version": "1.0.0",
+  "description": "Telegram bot with webhook support for Vercel",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon dev.js",
+    "webhook": "node setup-webhook.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "googleapis": "^133.0.0",
+    "google-auth-library": "^9.6.3",
+    "google-spreadsheet": "^4.1.1",
+    "node-telegram-bot-api": "^0.64.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
