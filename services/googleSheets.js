@@ -35,8 +35,8 @@ async function setupGoogleSheets() {
     const credentials = getGoogleCredentials();
     
     const jwt = new JWT({
-      email: credentials.client_email,
-      key: credentials.private_key,
+      email: env.client_email,
+      key: env.private_key,
       scopes: GOOGLE_API_SCOPES
     });
     
