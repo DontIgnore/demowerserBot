@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "index.js",
       "use": "@vercel/node"
     }
@@ -9,11 +13,15 @@
   "routes": [
     {
       "src": "/api/webhook",
-      "dest": "index.js"
+      "dest": "/api/webhook.js"
     },
     {
       "src": "/api/health",
-      "dest": "index.js"
+      "dest": "/api/health.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.js"
     }
   ]
 }

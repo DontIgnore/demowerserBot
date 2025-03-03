@@ -192,7 +192,7 @@ async function saveVideoRecord(link, title, views, thumbnail = "") {
       await sheet.updateDimensionProperties('ROWS', {
         startIndex: rowIndex - 1,
         endIndex: rowIndex,
-        pixelSize: 150
+        pixelSize: 400
       });
     } catch (e) {
       console.error('Ошибка при установке высоты строки:', e);

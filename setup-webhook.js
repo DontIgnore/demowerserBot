@@ -14,13 +14,14 @@ if (!token) {
   process.exit(1);
 }
 
-// Получаем URL для вебхука из аргументов командной строки
-const webhookUrl = process.argv[2];
+// Получаем URL для вебхука из переменных окружения или аргументов командной строки
+const webhookUrl = process.env.WEBHOOK_URL || process.argv[2];
 
 // Проверяем, что URL для вебхука был передан
 if (!webhookUrl) {
   console.error('Ошибка: URL для вебхука не указан');
-  console.log('Использование: node setup-webhook.js <URL>');
+  console.log('Использование: WEBHOOK_URL=<URL> node setup-webhook.js');
+  console.log('или: node setup-webhook.js <URL>');
   console.log('Пример: node setup-webhook.js https://ваш-домен.vercel.app/api/webhook');
   process.exit(1);
 }
@@ -28,10 +29,16 @@ if (!webhookUrl) {
 // Настройка вебхука
 async function setupWebhook() {
   try {
+    console.log(`Настройка вебхука для бота с токеном: ${token.substring(0, 5)}...`);
+    console.log(`URL вебхука: ${webhookUrl}`);
+    
     // Удаляем текущий вебхук (если есть)
-    await axios.get(`https://api.telegram.org/bot${token}/deleteWebhook`);
+    console.log('Удаление текущего вебхука...');
+    const deleteResponse = await axios.get(`https://api.telegram.org/bot${token}/deleteWebhook`);
+    console.log('Ответ на удаление вебхука:', deleteResponse.data);
     
     // Устанавливаем новый вебхук
+    console.log('Установка нового вебхука...');
     const response = await axios.get(`https://api.telegram.org/bot${token}/setWebhook`, {
       params: {
         url: webhookUrl,
